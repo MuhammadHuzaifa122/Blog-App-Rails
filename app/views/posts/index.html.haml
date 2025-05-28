@@ -1,19 +1,13 @@
-%h1 Blog Posts
+.container.mt-5
+  %h2.text-center.mb-4 All Posts
 
-= link_to "New Post", new_post_path, class: "btn btn-primary mb-3"
-
-%table.table.table-striped
-  %thead
-    %tr
-      %th Title
-      %th Content
-      %th Actions
-  %tbody
+  .row.g-4
     - @posts.each do |post|
-      %tr
-        %td= post.title
-        %td= truncate(post.content, length: 100)
-        %td
-          = link_to 'Show', post, class: 'btn btn-sm btn-info me-2'
-          = link_to 'Edit', edit_post_path(post), class: 'btn btn-sm btn-warning me-2'
-          = link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
+      .col-md-4
+        .card.h-100.shadow-sm
+          .card-body
+            %h5.card-title= post.title
+            %p.card-text= truncate(post.content, length: 100)
+          .card-footer.text-end.mt-3.d-flex
+            = link_to "Read More", post_path(post), class: "btn btn-sm btn-primary me-2 p-1 mb-auto"
+            = button_to "Delete", post_path(post), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-sm btn-danger"

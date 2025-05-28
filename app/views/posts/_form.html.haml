@@ -1,16 +1,19 @@
-= form_for @post do |f|
+= form_with model: @post, local: true do |form|
   - if @post.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
-      %ul
+    .alert.alert-danger
+      %h4.alert-heading
+        = pluralize(@post.errors.count, "error")
+        prevented this post from being saved:
+      %ul.mb-0
         - @post.errors.full_messages.each do |message|
           %li= message
 
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :content
-    = f.textarea :content
-  .actions
-    = f.submit 'Save'
+  .mb-3
+    = form.label :title, class: "form-label"
+    = form.text_field :title, class: "form-control", placeholder: "Enter post title"
+
+  .mb-3
+    = form.label :content, class: "form-label"
+    = form.text_area :content, rows: 5, class: "form-control", placeholder: "Write your content here..."
+
+  = form.submit @post.persisted? ? "Update Post" : "Create Post", class: "btn btn-primary"

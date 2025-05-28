@@ -1,0 +1,9 @@
+.container.mt-3
+  - flash.each do |type, message|
+    - bs_class = case type.to_sym
+      - when :notice then "alert-success"
+      - when :alert then "alert-danger"
+      - else "alert-info"
+    .alert{ class: "alert #{bs_class} alert-dismissible fade show", role: "alert" }
+      = message
+      %button.btn-close{ type: "button", data: { bs_dismiss: "alert" }, aria: { label: "Close" } }

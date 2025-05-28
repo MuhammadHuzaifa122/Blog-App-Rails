@@ -1,7 +1,12 @@
-%h1 Editing post
+.container.mt-5
+  .row.justify-content-center
+    .col-md-8
+      .card
+        .card-header.text-bg-dark
+          %h2 Edit Post
+        .card-body
+          = render 'form'
 
-= render 'form'
-
-= link_to 'Show', @post
-\|
-= link_to 'Back', posts_path
+          .mt-3.d-flex
+            = link_to "Back", posts_path, class: "btn btn-sm btn-secondary me-2 p-1 mb-auto"
+            = button_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger"
